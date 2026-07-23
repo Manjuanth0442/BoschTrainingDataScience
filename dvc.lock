@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: /bin/python3 rf_feature_engineering.py
+    deps:
+    - path: automobile_dataset.csv
+      hash: md5
+      md5: b7363c7552d1998beddc8304b086dfc1
+      size: 549702
+    - path: rf_feature_engineering.py
+      hash: md5
+      md5: d480230755abaed149bc0020ff7b6f77
+      size: 5768
+    params:
+      params.yaml:
+        train.max_depth:
+        train.min_samples_leaf: 2
+        train.min_samples_split: 4
+        train.n_estimators: 400
+        train.random_state: 42
+        train.test_size: 0.2
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: ada987c196365ad054fad172bf210946
+      size: 137
+    - path: random_forest_pipeline.pkl
+      hash: md5
+      md5: ac790016cbc927f05dcbd2a478789f0f
+      size: 57022867
+  recommend:
+    cmd: /bin/python3 run_pickle_recommendations.py
+    deps:
+    - path: random_forest_pipeline.pkl
+      hash: md5
+      md5: ac790016cbc927f05dcbd2a478789f0f
+      size: 57022867
+    - path: rf_feature_engineering.py
+      hash: md5
+      md5: d480230755abaed149bc0020ff7b6f77
+      size: 5768
+    - path: run_pickle_recommendations.py
+      hash: md5
+      md5: f0dc4a4a33fd2bd0df2b1a369a083f9b
+      size: 4770
+    outs:
+    - path: recommendations.csv
+      hash: md5
+      md5: d2f4251945edcb094e3613bfa8f76878
+      size: 840

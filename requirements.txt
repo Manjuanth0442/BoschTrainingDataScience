@@ -1,0 +1,7 @@
+dvc
+fastapi
+uvicorn
+pandas
+scikit-learn
+joblib
+pyyaml

@@ -1,0 +1,26 @@
+stages:
+  train:
+    cmd: /bin/python3 rf_feature_engineering.py
+    deps:
+    - automobile_dataset.csv
+    - rf_feature_engineering.py
+    params:
+    - train.test_size
+    - train.random_state
+    - train.n_estimators
+    - train.max_depth
+    - train.min_samples_split
+    - train.min_samples_leaf
+    outs:
+    - random_forest_pipeline.pkl
+    metrics:
+    - metrics.json
+
+  recommend:
+    cmd: /bin/python3 run_pickle_recommendations.py
+    deps:
+    - random_forest_pipeline.pkl
+    - rf_feature_engineering.py
+    - run_pickle_recommendations.py
+    outs:
+    - recommendations.csv

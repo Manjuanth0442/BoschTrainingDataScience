@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.git/
+.dvc/
+.dvcignore
+automobile_dataset.csv
+automobile_dataset.csv.dvc
+dvc.lock
+dvc.yaml
+metrics.json
+recommendations.csv
+swagger.json
+README.md
